@@ -1,0 +1,296 @@
+[
+  {
+    "name": "Ergonomic Office Chair",
+    "price": 249.99,
+    "description": "Premium ergonomic chair with lumbar support and adjustable armrests",
+    "image_url": "https://example.com/chair1.jpg"
+  },
+  {
+    "name": "Standing Desk",
+    "price": 399.99,
+    "description": "Electric height-adjustable standing desk with memory presets",
+    "image_url": "https://example.com/desk1.jpg"
+  },
+  {
+    "name": "Wireless Keyboard",
+    "price": 89.99,
+    "description": "Slim Bluetooth keyboard with quiet-touch keys",
+    "image_url": "https://example.com/keyboard1.jpg"
+  },
+  {
+    "name": "Noise Cancelling Headphones",
+    "price": 349.99,
+    "description": "Premium over-ear headphones with active noise cancellation",
+    "image_url": "https://example.com/headphones1.jpg"
+  },
+  {
+    "name": "4K Monitor",
+    "price": 599.99,
+    "description": "27-inch 4K UHD monitor with HDR support",
+    "image_url": "https://example.com/monitor1.jpg"
+  },
+  {
+    "name": "Gaming Mouse",
+    "price": 79.99,
+    "description": "High-DPI gaming mouse with customizable RGB lighting",
+    "image_url": "https://example.com/mouse1.jpg"
+  },
+  {
+    "name": "Desk Lamp",
+    "price": 49.99,
+    "description": "LED desk lamp with adjustable brightness and color temperature",
+    "image_url": "https://example.com/lamp1.jpg"
+  },
+  {
+    "name": "Laptop Stand",
+    "price": 39.99,
+    "description": "Adjustable aluminum laptop stand for ergonomic positioning",
+    "image_url": "https://example.com/stand1.jpg"
+  },
+  {
+    "name": "Webcam",
+    "price": 129.99,
+    "description": "1080p HD webcam with built-in microphone",
+    "image_url": "https://example.com/webcam1.jpg"
+  },
+  {
+    "name": "External SSD",
+    "price": 199.99,
+    "description": "1TB portable SSD with USB-C connectivity",
+    "image_url": "https://example.com/ssd1.jpg"
+  },
+  {
+    "name": "Wireless Charger",
+    "price": 29.99,
+    "description": "Qi-certified fast wireless charging pad",
+    "image_url": "https://example.com/charger1.jpg"
+  },
+  {
+    "name": "Mechanical Keyboard",
+    "price": 129.99,
+    "description": "Tenkeyless mechanical keyboard with Cherry MX switches",
+    "image_url": "https://example.com/keyboard2.jpg"
+  },
+  {
+    "name": "Monitor Arm",
+    "price": 89.99,
+    "description": "Gas-spring monitor mount with full motion adjustment",
+    "image_url": "https://example.com/arm1.jpg"
+  },
+  {
+    "name": "Document Scanner",
+    "price": 249.99,
+    "description": "Automatic document feeder scanner with OCR software",
+    "image_url": "https://example.com/scanner1.jpg"
+  },
+  {
+    "name": "Conference Speaker",
+    "price": 199.99,
+    "description": "360° speakerphone for conference calls with noise reduction",
+    "image_url": "https://example.com/speaker1.jpg"
+  },
+  {
+    "name": "Desk Organizer",
+    "price": 34.99,
+    "description": "Modern desk organizer with compartments for office supplies",
+    "image_url": "https://example.com/organizer1.jpg"
+  },
+  {
+    "name": "Foot Rest",
+    "price": 29.99,
+    "description": "Ergonomic under-desk foot rest with adjustable angle",
+    "image_url": "https://example.com/footrest1.jpg"
+  },
+  {
+    "name": "USB Hub",
+    "price": 24.99,
+    "description": "7-port USB 3.0 hub with individual power switches",
+    "image_url": "https://example.com/hub1.jpg"
+  },
+  {
+    "name": "Blue Light Glasses",
+    "price": 49.99,
+    "description": "Anti-glare computer glasses with blue light filtering",
+    "image_url": "https://example.com/glasses1.jpg"
+  },
+  {
+    "name": "Desk Mat",
+    "price": 19.99,
+    "description": "Large premium desk pad with stitched edges",
+    "image_url": "https://example.com/mat1.jpg"
+  },
+  {
+    "name": "Vertical Mouse",
+    "price": 59.99,
+    "description": "Ergonomic vertical mouse to reduce wrist strain",
+    "image_url": "https://example.com/mouse2.jpg"
+  },
+  {
+    "name": "Monitor Light Bar",
+    "price": 89.99,
+    "description": "LED light bar with adjustable brightness and color temperature",
+    "image_url": "https://example.com/lightbar1.jpg"
+  },
+  {
+    "name": "Cable Management Kit",
+    "price": 24.99,
+    "description": "Set of cable organizers and clips for desk setup",
+    "image_url": "https://example.com/cablekit1.jpg"
+  },
+  {
+    "name": "Laptop Backpack",
+    "price": 129.99,
+    "description": "Professional backpack with padded laptop compartment",
+    "image_url": "https://example.com/backpack1.jpg"
+  },
+  {
+    "name": "Air Purifier",
+    "price": 199.99,
+    "description": "HEPA air purifier for small to medium rooms",
+    "image_url": "https://example.com/purifier1.jpg"
+  },
+  {
+    "name": "Docking Station",
+    "price": 249.99,
+    "description": "Thunderbolt docking station with dual 4K display support",
+    "image_url": "https://example.com/dock1.jpg"
+  },
+  {
+    "name": "Whiteboard",
+    "price": 89.99,
+    "description": "Magnetic dry-erase whiteboard 36x24 inches",
+    "image_url": "https://example.com/whiteboard1.jpg"
+  },
+  {
+    "name": "Desk Chair Mat",
+    "price": 59.99,
+    "description": "Hardwood floor protector mat for office chairs",
+    "image_url": "https://example.com/chairmat1.jpg"
+  },
+  {
+    "name": "Wireless Presenter",
+    "price": 39.99,
+    "description": "Laser pointer and slide advancer for presentations",
+    "image_url": "https://example.com/presenter1.jpg"
+  },
+  {
+    "name": "Notebook",
+    "price": 14.99,
+    "description": "Premium A5 dotted notebook with 120gsm paper",
+    "image_url": "https://example.com/notebook1.jpg"
+  },
+  {
+    "name": "Pen Holder",
+    "price": 19.99,
+    "description": "Modern aluminum pen stand for desk organization",
+    "image_url": "https://example.com/penholder1.jpg"
+  },
+  {
+    "name": "Smart Notebook",
+    "price": 34.99,
+    "description": "Reusable notebook that syncs notes to the cloud",
+    "image_url": "https://example.com/smartnotebook1.jpg"
+  },
+  {
+    "name": "Desk Fan",
+    "price": 49.99,
+    "description": "Quiet USB desk fan with adjustable tilt and speed",
+    "image_url": "https://example.com/fan1.jpg"
+  },
+  {
+    "name": "Monitor Privacy Filter",
+    "price": 69.99,
+    "description": "17-inch privacy screen filter for widescreen monitors",
+    "image_url": "https://example.com/filter1.jpg"
+  },
+  {
+    "name": "Laptop Cooling Pad",
+    "price": 39.99,
+    "description": "USB-powered cooling pad with adjustable fan speeds",
+    "image_url": "https://example.com/cooler1.jpg"
+  },
+  {
+    "name": "Wall Calendar",
+    "price": 24.99,
+    "description": "Large format wall calendar with premium paper",
+    "image_url": "https://example.com/calendar1.jpg"
+  },
+  {
+    "name": "Stapler",
+    "price": 19.99,
+    "description": "Heavy-duty stapler with 20-sheet capacity",
+    "image_url": "https://example.com/stapler1.jpg"
+  },
+  {
+    "name": "Paper Shredder",
+    "price": 89.99,
+    "description": "Cross-cut shredder for up to 12 sheets at once",
+    "image_url": "https://example.com/shredder1.jpg"
+  },
+  {
+    "name": "Letter Tray",
+    "price": 29.99,
+    "description": "Stackable letter tray set in brushed metal finish",
+    "image_url": "https://example.com/tray1.jpg"
+  },
+  {
+    "name": "Book Stand",
+    "price": 24.99,
+    "description": "Adjustable book holder for reading or reference",
+    "image_url": "https://example.com/bookstand1.jpg"
+  },
+  {
+    "name": "Monitor Cleaning Kit",
+    "price": 14.99,
+    "description": "Microfiber cloth and screen cleaning solution",
+    "image_url": "https://example.com/cleaning1.jpg"
+  },
+  {
+    "name": "Wireless Earbuds",
+    "price": 149.99,
+    "description": "True wireless earbuds with noise cancellation",
+    "image_url": "https://example.com/earbuds1.jpg"
+  },
+  {
+    "name": "Graphic Tablet",
+    "price": 199.99,
+    "description": "Drawing tablet with pressure-sensitive stylus",
+    "image_url": "https://example.com/tablet1.jpg"
+  },
+  {
+    "name": "Desk Plant",
+    "price": 39.99,
+    "description": "Low-maintenance desk plant in ceramic pot",
+    "image_url": "https://example.com/plant1.jpg"
+  },
+  {
+    "name": "Coffee Warmer",
+    "price": 19.99,
+    "description": "USB-powered mug warmer with temperature control",
+    "image_url": "https://example.com/warmer1.jpg"
+  },
+  {
+    "name": "Fountain Pen",
+    "price": 89.99,
+    "description": "Premium fountain pen with gold nib",
+    "image_url": "https://example.com/pen1.jpg"
+  },
+  {
+    "name": "Desk Clock",
+    "price": 49.99,
+    "description": "Minimalist digital desk clock with temperature display",
+    "image_url": "https://example.com/clock1.jpg"
+  },
+  {
+    "name": "Stress Ball",
+    "price": 9.99,
+    "description": "Soft foam stress relief ball",
+    "image_url": "https://example.com/ball1.jpg"
+  },
+  {
+    "name": "Desk Vacuum",
+    "price": 29.99,
+    "description": "Mini USB rechargeable desktop vacuum cleaner",
+    "image_url": "https://example.com/vacuum1.jpg"
+  }
+]
