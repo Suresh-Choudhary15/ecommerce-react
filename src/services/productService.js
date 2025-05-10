@@ -1,7 +1,7 @@
 // productService.js - Improved API calls with proper error handling
 import axios from "axios";
 
-const API_URL = process.env.REACT_APP_API_URL || "/api";
+const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000/api";
 
 // Create an axios instance with defaults
 const apiClient = axios.create({
