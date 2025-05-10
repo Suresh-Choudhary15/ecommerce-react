@@ -1,155 +1,172 @@
-# E-Commerce Platform
+# Mini E-Commerce Platform
 
-A full-stack e-commerce application built with React, Node.js, Express, and PostgreSQL.
+A simple e-commerce web application with two main tabs: one for submitting products and one for viewing submitted products, featuring a smart search functionality.
 
 ## Features
 
-- Product management (CRUD operations)
-- Responsive design
-- RESTful API
-- Database integration with PostgreSQL
-- Error handling and validation
-- Modern UI with clean design
+### What's Working
+
+- **Product Submission**: Users can add new products with name, price, description, and image URL
+- **Products Display**: View all submitted products in a responsive card layout
+- **Basic Search**: Search products by name or keywords
+- **Smart Contextual Search**: Enhanced search using PostgreSQL full-text search capabilities
+- **Responsive Design**: Mobile-friendly UI using Tailwind CSS
 
 ## Tech Stack
 
 ### Frontend
 
-- React
-- React Router
-- Axios
-- CSS/SCSS
+- React.js
+- React Router for navigation
+- Tailwind CSS for styling
+- Axios for API requests
 
 ### Backend
 
-- Node.js
-- Express
-- PostgreSQL
-- dotenv for environment variables
-- express-validator for validation
+- Node.js with Express
+- PostgreSQL database
+- RESTful API architecture
 
-## Installation and Setup
+### Development
+
+- Git version control
+- Environment variables for configuration
+
+## Setup Instructions
 
 ### Prerequisites
 
-- Node.js (v14 or higher)
-- PostgreSQL database
+- Node.js (v14+ recommended)
+- npm or yarn
+- PostgreSQL
 
 ### Database Setup
 
-1. Create a PostgreSQL database named `ecommerce`
-2. Update the database credentials in the `.env` file
-3. Run the database schema setup script:
-   ```bash
-   psql -U postgres -d ecommerce -f schema.sql
-   ```
+1. Create a PostgreSQL database:
+
+```sql
+CREATE DATABASE mini_ecommerce;
+```
+
+2. Run the database schema script:
+
+```bash
+psql -d mini_ecommerce -f server/db/schema.sql
+```
 
 ### Backend Setup
 
 1. Navigate to the server directory:
-   ```bash
-   cd server
-   ```
+
+```bash
+cd server
+```
+
 2. Install dependencies:
-   ```bash
-   npm install
-   ```
-3. Create a `.env` file based on the `.env.example` template
+
+```bash
+npm install
+```
+
+3. Create a `.env` file based on `.env.example`:
+
+```
+PORT=5000
+DB_USER=your_db_user
+DB_PASSWORD=your_db_password
+DB_HOST=localhost
+DB_PORT=5432
+DB_NAME=mini_ecommerce
+NODE_ENV=development
+```
+
 4. Start the server:
-   ```bash
-   npm run dev
-   ```
+
+```bash
+npm run dev
+```
 
 ### Frontend Setup
 
 1. Navigate to the client directory:
-   ```bash
-   cd client
-   ```
+
+```bash
+cd client
+```
+
 2. Install dependencies:
-   ```bash
-   npm install
-   ```
-3. Create a `.env` file based on the `.env.example` template
+
+```bash
+npm install
+```
+
+3. Create a `.env` file based on `.env.example`:
+
+```
+REACT_APP_API_URL=http://localhost:5000/api
+```
+
 4. Start the development server:
-   ```bash
-   npm start
-   ```
 
-## Project Structure
-
-```
-├── client/                 # React frontend
-│   ├── public/             # Static files
-│   ├── src/                # Source code
-│   │   ├── components/     # React components
-│   │   ├── pages/          # Page components
-│   │   ├── services/       # API services
-│   │   ├── utils/          # Utility functions
-│   │   └── App.js          # Main app component
-│   └── package.json        # Frontend dependencies
-│
-├── server/                 # Node.js backend
-│   ├── controllers/        # Request handlers
-│   ├── db/                 # Database setup and queries
-│   ├── routes/             # API routes
-│   ├── middleware/         # Custom middleware
-│   ├── utils/              # Utility functions
-│   ├── .env                # Environment variables
-│   └── index.js            # Entry point
-│
-├── schema.sql              # Database schema
-└── README.md               # Project documentation
+```bash
+npm start
 ```
 
-## API Endpoints
+5. Open your browser and visit:
 
-### Products
+```
+http://localhost:3000
+```
+
+## API Documentation
+
+### Endpoints
+
+#### Products
 
 - `GET /api/products` - Get all products
-- `GET /api/products/:id` - Get a single product
+- `GET /api/products/:id` - Get a product by ID
 - `POST /api/products` - Create a new product
 - `PUT /api/products/:id` - Update a product
 - `DELETE /api/products/:id` - Delete a product
 
-## Best Practices Implemented
+#### Search
 
-1. **Error Handling**:
+- `GET /api/products/search?query=keyword` - Search products by keyword
+- `GET /api/products/search?query=keyword&advanced=true` - Advanced contextual search
 
-   - Client-side error boundaries
-   - Proper API error responses
-   - Form validation
+## Project Structure
 
-2. **Security**:
+```
+mini-ecommerce/
+├── client/                 # Frontend React application
+│   ├── public/
+│   ├── src/
+│   │   ├── components/     # Reusable UI components
+│   │   ├── pages/          # Page components for tabs
+│   │   ├── services/       # API service functions
+│   │   └── App.js          # Main application component
+│   ├── package.json
+│   └── tailwind.config.js  # Tailwind CSS configuration
+├── server/                 # Backend Node.js application
+│   ├── config/             # Configuration files
+│   ├── controllers/        # Route handlers
+│   ├── models/             # Database models
+│   ├── routes/             # API routes
+│   ├── db/                 # Database setup
+│   └── server.js           # Entry point
+├── .gitignore
+└── README.md
+```
 
-   - Environment variables for sensitive data
-   - Input validation
-   - Prepared statements for SQL queries
+## Contributing
 
-3. **Performance**:
-
-   - Database indexes
-   - Error logging
-   - Optimized React components
-
-4. **Code Quality**:
-   - Consistent code style
-   - Component-based architecture
-   - Service abstraction for API calls
-
-## Future Enhancements
-
-- User authentication
-- Shopping cart functionality
-- Order processing
-- Admin dashboard
-- Payment integration
-- Image upload
+1. Fork the repository
+2. Create a feature branch: `git checkout -b feature-name`
+3. Commit your changes: `git commit -m 'Add some feature'`
+4. Push to the branch: `git push origin feature-name`
+5. Submit a pull request
 
 ## License
 
-MIT
-
-## Author
-
-Suresh Choudhary
+This project is licensed under the MIT License.

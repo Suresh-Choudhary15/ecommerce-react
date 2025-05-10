@@ -1,44 +1,43 @@
--- Create products table
-CREATE TABLE IF NOT EXISTS products (
+-- Products Table
+CREATE TABLE products (
   id SERIAL PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
   price DECIMAL(10, 2) NOT NULL,
-  description TEXT NOT NULL,
+  description TEXT,
   image_url TEXT,
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
--- Create users table (if you plan to add authentication)
-CREATE TABLE IF NOT EXISTS users (
-  id SERIAL PRIMARY KEY,
-  username VARCHAR(50) UNIQUE NOT NULL,
-  email VARCHAR(255) UNIQUE NOT NULL,
-  password_hash VARCHAR(255) NOT NULL,
-  is_admin BOOLEAN DEFAULT FALSE,
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
+-- Optional: Create index for faster text search
+CREATE INDEX idx_products_name ON products(name);
+CREATE INDEX idx_products_description ON products(description);
 
--- Create orders table (for future expansion)
-CREATE TABLE IF NOT EXISTS orders (
-  id SERIAL PRIMARY KEY,
-  user_id INTEGER REFERENCES users(id),
-  status VARCHAR(50) NOT NULL DEFAULT 'pending',
-  total DECIMAL(10, 2) NOT NULL,
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
+-- Optional: Function to update timestamp
+CREATE OR REPLACE FUNCTION update_modified_column()
+RETURNS TRIGGER AS $$
+BEGIN
+    NEW.updated_at = now();
+    RETURN NEW;
+END;
+$$ language 'plpgsql';
 
--- Create order_items table (for future expansion)
-CREATE TABLE IF NOT EXISTS order_items (
-  id SERIAL PRIMARY KEY,
-  order_id INTEGER REFERENCES orders(id) ON DELETE CASCADE,
-  product_id INTEGER REFERENCES products(id) ON DELETE SET NULL,
-  quantity INTEGER NOT NULL,
-  price DECIMAL(10, 2) NOT NULL
-);
+-- Optional: Trigger to update timestamp on product update
+CREATE TRIGGER update_products_modtime
+BEFORE UPDATE ON products
+FOR EACH ROW
+EXECUTE FUNCTION update_modified_column();
 
--- Add indexes for better query performance
-CREATE INDEX IF NOT EXISTS idx_products_name ON products(name);
-CREATE INDEX IF NOT EXISTS idx_orders_user_id ON orders(user_id);
-CREATE INDEX IF NOT EXISTS idx_order_items_order_id ON order_items(order_id);
+-- Optional: Create a view for basic search
+CREATE VIEW product_search AS
+SELECT 
+  id,
+  name,
+  price,
+  description,
+  image_url,
+  to_tsvector('english', name || ' ' || description) as search_vector
+FROM products;
+
+-- Optional: Create index for faster full-text search if needed
+CREATE INDEX idx_products_search ON product_search USING GIN(search_vector);
