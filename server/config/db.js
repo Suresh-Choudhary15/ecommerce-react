@@ -1,27 +1,39 @@
-// Server/db.js
+// Fix for PostgreSQL connection in db.js or database.js
 const { Pool } = require("pg");
+
+// Environment variables should be loaded from a .env file using dotenv
 require("dotenv").config();
 
-// Use environment variables for database connection
+// Best practice: Use environment variables for sensitive information
 const pool = new Pool({
   user: process.env.DB_USER || "postgres",
   host: process.env.DB_HOST || "localhost",
   database: process.env.DB_NAME || "ecommerce",
-  password: process.env.DB_PASSWORD || "password",
+  password: process.env.DB_PASSWORD, // This should be set in .env file
   port: process.env.DB_PORT || 5432,
+  ssl: process.env.DB_SSL === "true" ? { rejectUnauthorized: false } : false,
 });
 
-// Test database connection
-pool.connect((err, client, done) => {
-  if (err) {
-    console.error("Error connecting to the database:", err);
-  } else {
-    console.log("Connected to the database successfully");
-    done();
-  }
+// Add proper error handling for database connection
+pool.on("error", (err) => {
+  console.error("Unexpected error on idle client", err);
+  process.exit(-1);
 });
+
+// Test database connection on startup
+const testConnection = async () => {
+  try {
+    const client = await pool.connect();
+    console.log("Successfully connected to PostgreSQL database");
+    client.release();
+  } catch (err) {
+    console.error("Database connection error:", err.message);
+  }
+};
+
+testConnection();
 
 module.exports = {
   query: (text, params) => pool.query(text, params),
-  pool,
+  getPool: () => pool,
 };

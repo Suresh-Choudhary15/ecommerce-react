@@ -1,22 +1,26 @@
 // server/index.js
 require("dotenv").config();
+
 const express = require("express");
 const cors = require("cors");
-const morgan = require("morgan");
+const helmet = require("helmet");
+const path = require("path");
+
+// Import routes
 const productRoutes = require("./routes/productRoutes");
 
-// Initialize Express
+// Initialize Express app
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+// Import database connection
+const db = require("./config/db");
+
 // Middleware
-app.use(
-  cors({
-    origin: process.env.CORS_ORIGIN || "http://localhost:3000",
-  })
-);
+app.use(cors());
+app.use(helmet()); // Add security headers
 app.use(express.json());
-app.use(morgan("dev")); // Logging
+app.use(express.urlencoded({ extended: true }));
 
 // API Routes
 app.use("/api/products", productRoutes);
@@ -24,21 +28,25 @@ app.use("/api/products", productRoutes);
 // Error handling middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);
-  res.status(500).json({
-    message: "An unexpected error occurred!",
-    error:
-      process.env.NODE_ENV === "production"
-        ? "Internal server error"
-        : err.message,
+  const statusCode = err.statusCode || 500;
+  res.status(statusCode).json({
+    error: err.message || "Internal Server Error",
+    ...(process.env.NODE_ENV === "development" && { stack: err.stack }),
   });
 });
 
-// Handle undefined routes
-app.use("*", (req, res) => {
-  res.status(404).json({ message: "Resource not found" });
-});
+// Serve static assets in production
+if (process.env.NODE_ENV === "production") {
+  // Serve static files from the React app
+  app.use(express.static(path.join(__dirname, "../client/build")));
 
-// Start server
+  // The "catchall" handler: for any request not matching the ones above, send back React's index.html file.
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "../client/build/index.html"));
+  });
+}
+
+// Start the server
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });

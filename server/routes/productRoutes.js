@@ -1,53 +1,31 @@
-// server/routes/productRoutes.js
+// Improved product routes with proper error handling
 const express = require("express");
 const router = express.Router();
-const db = require("../config/db");
+const db = require("../config/db"); // Adjust path as needed
 const { validationResult, body } = require("express-validator");
 
 // Validation middleware for product creation
 const validateProduct = [
   body("name").notEmpty().withMessage("Product name is required"),
-  body("price")
-    .isFloat({ min: 0.01 })
-    .withMessage("Price must be a positive number"),
+  body("price").isNumeric().withMessage("Price must be a valid number"),
   body("description").notEmpty().withMessage("Description is required"),
-  body("imageUrl")
-    .optional()
-    .isURL()
-    .withMessage("Image URL must be a valid URL"),
 ];
 
-// GET all products
+// GET all products with proper error handling
 router.get("/", async (req, res) => {
   try {
-    const result = await db.query(
-      "SELECT * FROM products ORDER BY created_at DESC"
-    );
+    const result = await db.query("SELECT * FROM products ORDER BY id DESC");
     res.json(result.rows);
-  } catch (error) {
-    console.error("Error fetching products:", error);
-    res.status(500).json({ message: "Server error while fetching products" });
+  } catch (err) {
+    console.error("Error fetching products:", err);
+    res.status(500).json({
+      error: "Failed to fetch products",
+      details: process.env.NODE_ENV === "development" ? err.message : undefined,
+    });
   }
 });
 
-// GET product by ID
-router.get("/:id", async (req, res) => {
-  try {
-    const { id } = req.params;
-    const result = await db.query("SELECT * FROM products WHERE id = $1", [id]);
-
-    if (result.rows.length === 0) {
-      return res.status(404).json({ message: "Product not found" });
-    }
-
-    res.json(result.rows[0]);
-  } catch (error) {
-    console.error("Error fetching product:", error);
-    res.status(500).json({ message: "Server error while fetching product" });
-  }
-});
-
-// POST new product
+// POST create a new product with validation
 router.post("/", validateProduct, async (req, res) => {
   // Check for validation errors
   const errors = validationResult(req);
@@ -55,32 +33,95 @@ router.post("/", validateProduct, async (req, res) => {
     return res.status(400).json({ errors: errors.array() });
   }
 
-  try {
-    const { name, price, description, imageUrl } = req.body;
+  const { name, price, description, image_url } = req.body;
 
+  try {
     const result = await db.query(
       "INSERT INTO products (name, price, description, image_url) VALUES ($1, $2, $3, $4) RETURNING *",
-      [name, price, description, imageUrl]
+      [name, price, description, image_url || null]
     );
 
-    // Transform the data to match frontend expectations
-    const product = result.rows[0];
-    const transformedProduct = {
-      id: product.id,
-      name: product.name,
-      price: product.price,
-      description: product.description,
-      imageUrl: product.image_url, // Map image_url to imageUrl for frontend consistency
-      createdAt: product.created_at,
-    };
-
-    res.status(201).json(transformedProduct);
-  } catch (error) {
-    console.error("Error creating product:", error);
-    res.status(500).json({ message: "Server error while creating product" });
+    res.status(201).json(result.rows[0]);
+  } catch (err) {
+    console.error("Error creating product:", err);
+    res.status(500).json({
+      error: "Failed to create product",
+      details: process.env.NODE_ENV === "development" ? err.message : undefined,
+    });
   }
 });
 
-// Add more routes as needed (UPDATE, DELETE, etc.)
+// GET a single product by ID
+router.get("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const result = await db.query("SELECT * FROM products WHERE id = $1", [id]);
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: "Product not found" });
+    }
+
+    res.json(result.rows[0]);
+  } catch (err) {
+    console.error("Error fetching product:", err);
+    res.status(500).json({
+      error: "Failed to fetch product",
+      details: process.env.NODE_ENV === "development" ? err.message : undefined,
+    });
+  }
+});
+
+// PUT update product
+router.put("/:id", validateProduct, async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
+  const { id } = req.params;
+  const { name, price, description, image_url } = req.body;
+
+  try {
+    const result = await db.query(
+      "UPDATE products SET name = $1, price = $2, description = $3, image_url = $4, updated_at = NOW() WHERE id = $5 RETURNING *",
+      [name, price, description, image_url || null, id]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: "Product not found" });
+    }
+
+    res.json(result.rows[0]);
+  } catch (err) {
+    console.error("Error updating product:", err);
+    res.status(500).json({
+      error: "Failed to update product",
+      details: process.env.NODE_ENV === "development" ? err.message : undefined,
+    });
+  }
+});
+
+// DELETE product
+router.delete("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const result = await db.query(
+      "DELETE FROM products WHERE id = $1 RETURNING *",
+      [id]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: "Product not found" });
+    }
+
+    res.json({ message: "Product deleted successfully" });
+  } catch (err) {
+    console.error("Error deleting product:", err);
+    res.status(500).json({
+      error: "Failed to delete product",
+      details: process.env.NODE_ENV === "development" ? err.message : undefined,
+    });
+  }
+});
 
 module.exports = router;

@@ -1,134 +1,155 @@
-# Mini E-Commerce Platform
+# E-Commerce Platform
 
-A simple e-commerce web application with two main tabs — one for submitting products, and one for viewing submitted products with search functionality.
+A full-stack e-commerce application built with React, Node.js, Express, and PostgreSQL.
 
 ## Features
 
-- **Product Submission**: Add products with name, price, description, and optional image URL
-- **Product Listing**: View all submitted products in a responsive grid layout
-- **Search Functionality**: Search products by name or description
-- **Responsive Design**: Works well on desktop and mobile devices
-- **Error Handling**: Handles API errors gracefully with fallback options
-- **Form Validation**: Validates user inputs before submission
+- Product management (CRUD operations)
+- Responsive design
+- RESTful API
+- Database integration with PostgreSQL
+- Error handling and validation
+- Modern UI with clean design
 
 ## Tech Stack
 
-- **Frontend**: React.js with Tailwind CSS
-- **Backend**: Node.js with Express
-- **Database**: PostgreSQL
-- **State Management**: React Context API
-- **Styling**: Tailwind CSS
+### Frontend
 
-## Setup Instructions
+- React
+- React Router
+- Axios
+- CSS/SCSS
+
+### Backend
+
+- Node.js
+- Express
+- PostgreSQL
+- dotenv for environment variables
+- express-validator for validation
+
+## Installation and Setup
 
 ### Prerequisites
 
-- Node.js (v14+)
-- npm or yarn
+- Node.js (v14 or higher)
 - PostgreSQL database
 
-### Frontend Setup
+### Database Setup
 
-1. Clone the repository:
-
-   ```
-   git clone https://github.com/your-username/mini-ecommerce-platform.git
-   cd mini-ecommerce-platform
-   ```
-
-2. Install dependencies:
-
-   ```
-   npm install
-   ```
-
-3. Create a `.env` file in the root directory and add:
-
-   ```
-   REACT_APP_API_URL=http://localhost:5000/api
-   ```
-
-4. Start the development server:
-   ```
-   npm start
+1. Create a PostgreSQL database named `ecommerce`
+2. Update the database credentials in the `.env` file
+3. Run the database schema setup script:
+   ```bash
+   psql -U postgres -d ecommerce -f schema.sql
    ```
 
 ### Backend Setup
 
-1. Navigate to the backend directory:
-
+1. Navigate to the server directory:
+   ```bash
+   cd server
    ```
-   cd backend
-   ```
-
 2. Install dependencies:
-
-   ```
+   ```bash
    npm install
    ```
-
-3. Create a `.env` file in the backend directory and add:
-
-   ```
-   PORT=5000
-   DATABASE_URL=postgresql://username:password@localhost:5432/ecommerce
-   CORS_ORIGIN=http://localhost:3000
+3. Create a `.env` file based on the `.env.example` template
+4. Start the server:
+   ```bash
+   npm run dev
    ```
 
-4. Set up the database:
+### Frontend Setup
 
+1. Navigate to the client directory:
+   ```bash
+   cd client
    ```
-   npm run db:setup
+2. Install dependencies:
+   ```bash
+   npm install
    ```
-
-5. Start the backend server:
-   ```
+3. Create a `.env` file based on the `.env.example` template
+4. Start the development server:
+   ```bash
    npm start
    ```
 
 ## Project Structure
 
 ```
-/src
-  /components          # Reusable UI components
-    Navbar.jsx
-    ProductCard.jsx
-    ProductForm.jsx
-    ProductList.jsx
-    Search.jsx
-    Tabs.jsx
-  /context            # State management
-    ProductContext.jsx
-  /pages              # Page components
-    Home.jsx
-    Products.jsx
-    SubmitProduct.jsx
-  /services           # API services
-    api.js
-  App.jsx             # Root component
-  index.js            # Entry point
-  index.css           # Global styles
+├── client/                 # React frontend
+│   ├── public/             # Static files
+│   ├── src/                # Source code
+│   │   ├── components/     # React components
+│   │   ├── pages/          # Page components
+│   │   ├── services/       # API services
+│   │   ├── utils/          # Utility functions
+│   │   └── App.js          # Main app component
+│   └── package.json        # Frontend dependencies
+│
+├── server/                 # Node.js backend
+│   ├── controllers/        # Request handlers
+│   ├── db/                 # Database setup and queries
+│   ├── routes/             # API routes
+│   ├── middleware/         # Custom middleware
+│   ├── utils/              # Utility functions
+│   ├── .env                # Environment variables
+│   └── index.js            # Entry point
+│
+├── schema.sql              # Database schema
+└── README.md               # Project documentation
 ```
 
-## What's Working
+## API Endpoints
 
-- ✅ Two-tab interface for submitting and viewing products
-- ✅ Product submission form with validation
-- ✅ Product listing with responsive grid layout
-- ✅ Search functionality for filtering products
-- ✅ API integration with error handling
-- ✅ Responsive design for all screen sizes
-- ✅ Proper state management using Context API
+### Products
 
-## Future Improvements
+- `GET /api/products` - Get all products
+- `GET /api/products/:id` - Get a single product
+- `POST /api/products` - Create a new product
+- `PUT /api/products/:id` - Update a product
+- `DELETE /api/products/:id` - Delete a product
 
-- Authentication system
-- Categories and filters
-- Product details page
+## Best Practices Implemented
+
+1. **Error Handling**:
+
+   - Client-side error boundaries
+   - Proper API error responses
+   - Form validation
+
+2. **Security**:
+
+   - Environment variables for sensitive data
+   - Input validation
+   - Prepared statements for SQL queries
+
+3. **Performance**:
+
+   - Database indexes
+   - Error logging
+   - Optimized React components
+
+4. **Code Quality**:
+   - Consistent code style
+   - Component-based architecture
+   - Service abstraction for API calls
+
+## Future Enhancements
+
+- User authentication
 - Shopping cart functionality
-- User reviews and ratings
+- Order processing
 - Admin dashboard
+- Payment integration
+- Image upload
 
 ## License
 
 MIT
+
+## Author
+
+Suresh Choudhary
